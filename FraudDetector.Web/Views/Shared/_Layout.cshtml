@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization;
+
+@inject IViewLocalizer Localizer
+@*@inject ICurrentCultureService CultureService*@
+
+<!DOCTYPE html>
+<html @*lang="@CultureService.GetCurrentUICulture()" dir="@(CultureService.IsRtl() ? "rtl" : "ltr")"*@ class="light-style customizer-hide">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mawgoud</title>
+    @*<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
+    @*    @if (CultureService.IsRtl())
+    {
+    <link href="~/css/core.rtl.css" rel="stylesheet" />
+    <link href="~/css/theme-default.rtl.css" rel="stylesheet" />
+    }
+    else
+    {*@
+    <link href="~/css/core.css" rel="stylesheet" />
+    <link href="~/css/theme-default.css" rel="stylesheet" />
+    @*}*@
+    <link href="~/css/demo.css" rel="stylesheet" />
+    <link href="~/fonts/boxicons.css" rel="stylesheet" />
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <link href="~/css/datatables.css" rel="stylesheet" />
+    <link href="~/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet" />
+    <link href="~/lib/flag-icons/css/flag-icons.min.css" rel="stylesheet" />
+    <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/css/myStyle.css" rel="stylesheet" />
+    <link href="~/lib/ag-grid-community/styles/ag-grid.min.css" rel="stylesheet" />
+    <link href="~/lib/ag-grid-community/styles/ag-theme-material.min.css" rel="stylesheet" />
+    <base href="~/" />
+    <component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)" render-mode="ServerPrerendered" />
+</head>
+<body>
+
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+
+            <partial name="_SideMenu" />
+
+            <div class="layout-page">
+
+                <partial name="_SearchBar" />
+
+                <div class="content-wrapper">
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        @RenderBody()
+                    </div>
+
+                    <partial name="_Footer" />
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <partial name="_Modals" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/axios/dist/axios.min.js"></script>
+    <script src="~/lib/js-loading-overlay/dist/js-loading-overlay.min.js"></script>
+    <script src="~/lib/fortawesome/fontawesome-free/js/all.js"></script>
+    <script src="~/lib/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="~/js/helpers.js"></script>
+    <script src="~/js/menu.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/toast.js"></script>
+    <script src="~/js/api.js"></script>
+    <script src="~/js/alert.js"></script>
+    <script src="~/js/animate.js"></script>
+    <script src="~/js/language-selector.js"></script>
+    <script src="~/lib/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+    <script src="~/lib/ag-grid-community/dist/ag-grid-community.noStyle.min.js"></script>
+    @*   <script src="_framework/blazor.server.js"></script>*@
+    <partial name="_Localization" />
+    <script src="~/js/core.js"></script>
+    <script src="~/js/alert.js"></script>
+    <script src="~/lib/select2/dist/js/select2.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

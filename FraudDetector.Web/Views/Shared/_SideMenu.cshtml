@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Localization;
+
+@inject IViewLocalizer Localizer
+@*@inject ICurrentCultureService CurentCultureService*@
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="#" target="_blank" class="app-brand-link">
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">Fraud Detector</span>
+        </a>
+        <a href="#" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+    @*    <div class="menu-language-selector mt-2 me-2 p-3">
+    <component type="typeof(LanguageSelector)" param-CurrentCulture="CurentCultureService.GetCurrentUICulture()" render-mode="ServerPrerendered" />
+    </div>*@
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <li class="menu-item">
+            <a href="/Settings/Dashboard/Index" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div>@Localizer["Dashboard"]</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-terminal"></i>
+                <div>@Localizer["System"]</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="/Settings/Modules/Index" class="menu-link">
+                        <div>@Localizer["Modules"]</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/Settings/Operations/Index" class="menu-link">
+                        <div>@Localizer["Operations"]</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/Settings/Pages/Index" class="menu-link">
+                        <div>@Localizer["Pages"]</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div>@Localizer["Settings"]</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="/Settings/Roles/Index" class="menu-link">
+                        <div>@Localizer["Roles"]</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/Settings/Users/Index" class="menu-link">
+                        <div>@Localizer["Users"]</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+
+<script type="module">
+
+    $(function () {
+        var url = location.pathname == '/' ? '/Settings/Dashboard/Index' : location.pathname;
+        url = url.split('/').reverse().splice(1).reverse().join('/');
+        var anchor = $(`a[href^="${url}"]`).parent();
+        anchor.addClass('active');
+        anchor.closest('.menu-sub').parent().addClass('active open');
+    });
+
+    $(document).on('click', '.language', function () {
+        $.get(`/Settings/Users/SetLanguage?culture=${$(this).data('culture')}`).then(() => location.reload())
+    })
+
+</script>

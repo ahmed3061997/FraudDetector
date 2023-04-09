@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization;
+
+
+@*@inject IStringLocalizer<SharedResource> Localizer
+@inject ICurrentCultureService CultureService*@
+
+<!DOCTYPE html>
+<html @*lang="@CultureService.GetCurrentUICulture()" dir="@(CultureService.IsRtl() ? "rtl" : "ltr")"*@ class="light-style customizer-hide">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mawgoud</title>
+    @*    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/lib/mdb-ui-kit/css/mdb.min.css" rel="stylesheet" />
+@*    @if (CultureService.IsRtl())
+    {
+        <link href="~/css/core.rtl.css" rel="stylesheet" />
+        <link href="~/css/theme-default.rtl.css" rel="stylesheet" />
+    }
+    else
+    {*@
+        <link href="~/css/core.css" rel="stylesheet" />
+        <link href="~/css/theme-default.css" rel="stylesheet" />
+    @*}*@
+    <link href="~/css/demo.css" rel="stylesheet" />
+    <link href="~/css/pages/page-auth.css" rel="stylesheet" />
+    <link href="~/fonts/boxicons.css" rel="stylesheet" />
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <link href="~/css/datatables.css" rel="stylesheet" />
+    <link href="~/lib/flag-icons/css/flag-icons.min.css" rel="stylesheet" />
+    <base href="~/" />
+    <component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)" render-mode="ServerPrerendered" />
+</head>
+<body>
+
+    <div class="container-xxl">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner">
+             @*   <div class="menu-language-selector mt-2 me-2 p-3">
+                    <component type="typeof(LanguageSelector)" param-CurrentCulture="CultureService.GetCurrentUICulture()" render-mode="ServerPrerendered" />
+                </div>*@
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/axios/dist/axios.min.js"></script>
+    <script src="~/lib/js-loading-overlay/dist/js-loading-overlay.min.js"></script>
+    <script src="~/lib/fortawesome/fontawesome-free/js/all.js"></script>
+    <script src="~/lib/datatables/media/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/mdb-ui-kit/js/mdb.min.js"></script>
+    <script src="~/js/helpers.js"></script>
+    <script src="~/js/menu.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/core.js"></script>
+    <script src="~/js/toast.js"></script>
+    <script src="~/js/api.js"></script>
+    <script src="~/js/language-selector.js"></script>
+    <script src="_framework/blazor.server.js"></script>
+    <script type="module">
+
+        $(document).on('click', '.language', function () {
+            $.get(`/Settings/Users/SetLanguage?culture=${$(this).data('culture')}`).then(() => location.reload())
+        })
+
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
