@@ -11,18 +11,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Mawgoud</title>
+    <title>Fraud Detector</title>
     @*    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
     <link href="~/lib/mdb-ui-kit/css/mdb.min.css" rel="stylesheet" />
-@*    @if (CultureService.IsRtl())
+    @*    @if (CultureService.IsRtl())
     {
-        <link href="~/css/core.rtl.css" rel="stylesheet" />
-        <link href="~/css/theme-default.rtl.css" rel="stylesheet" />
+    <link href="~/css/core.rtl.css" rel="stylesheet" />
+    <link href="~/css/theme-default.rtl.css" rel="stylesheet" />
     }
     else
     {*@
-        <link href="~/css/core.css" rel="stylesheet" />
-        <link href="~/css/theme-default.css" rel="stylesheet" />
+    <link href="~/css/core.css" rel="stylesheet" />
+    <link href="~/css/theme-default.css" rel="stylesheet" />
     @*}*@
     <link href="~/css/demo.css" rel="stylesheet" />
     <link href="~/css/pages/page-auth.css" rel="stylesheet" />
@@ -38,8 +38,8 @@
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
-             @*   <div class="menu-language-selector mt-2 me-2 p-3">
-                    <component type="typeof(LanguageSelector)" param-CurrentCulture="CultureService.GetCurrentUICulture()" render-mode="ServerPrerendered" />
+                @*   <div class="menu-language-selector mt-2 me-2 p-3">
+                <component type="typeof(LanguageSelector)" param-CurrentCulture="CultureService.GetCurrentUICulture()" render-mode="ServerPrerendered" />
                 </div>*@
                 @RenderBody()
             </div>
