@@ -254,14 +254,6 @@
       ]
     },
     {
-      "library": "flag-icons@6.6.6",
-      "destination": "wwwroot/lib/flag-icons/"
-    },
-    {
-      "library": "select2@4.1.0-rc.0",
-      "destination": "wwwroot/lib/select2/"
-    },
-    {
       "library": "ag-grid-community@29.1.0",
       "destination": "wwwroot/lib/ag-grid-community/",
       "files": [
