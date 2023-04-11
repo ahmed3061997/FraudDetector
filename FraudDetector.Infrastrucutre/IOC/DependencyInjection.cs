@@ -1,12 +1,12 @@
 ﻿using FraudDetector.Application.Contracts;
-using FraudDetector.Application.Services;
+using FraudDetector.Infrastrucutre.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FraudDetector.Application.IOC
+namespace FraudDetector.Infrastrucutre.IOC
 {
     public static class DependencyInjection
     {
-        public static void AddApplication(this IServiceCollection services)
+        public static void AddServices(this IServiceCollection services)
         {
             services.AddTransient<IFraudFlagService, FraudFlagService>();
         }

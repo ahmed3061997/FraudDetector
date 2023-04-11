@@ -3,12 +3,8 @@ using FraudDetector.Application.Contracts;
 using FraudDetector.Application.DTOs.Flag;
 using FraudDetector.Domain.Entities;
 using FraudDetector.Domain.Repositories.Base;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace FraudDetector.Application.Services
+namespace FraudDetector.Infrastrucutre.Services
 {
     public class FraudFlagService : IFraudFlagService
     {
