@@ -1,10 +1,12 @@
 using FraudDetector.Application.IOC;
 using FraudDetector.Persistence.IOC;
+using FraudDetector.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddPersistence(configuration);
 builder.Services.AddApplication();
