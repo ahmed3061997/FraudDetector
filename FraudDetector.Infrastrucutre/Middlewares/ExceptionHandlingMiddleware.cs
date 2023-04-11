@@ -1,7 +1,9 @@
 ﻿using FraudDetector.Domain.Exceptions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace FraudDetector.WebAPI.Middlewares
+namespace FraudDetector.Infrastrucutre.Middlewares
 {
     internal sealed class ExceptionHandlingMiddleware : IMiddleware
     {
