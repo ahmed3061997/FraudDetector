@@ -1,5 +1,7 @@
 using FraudDetector.Infrastrucutre.IOC;
 using FraudDetector.Persistence.IOC;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -14,12 +16,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Adding Serilog
+Log.Logger = new LoggerConfiguration().CreateBootstrapLogger();
+builder.Host.UseSerilog(((ctx, lc) => lc
+.ReadFrom.Configuration(ctx.Configuration)));
+
 builder.Services.AddLogging(config =>
 {
-    config.AddDebug();
-    config.AddConsole();
+    config.ClearProviders();
+    config.AddSerilog(dispose: true);
 });
 
+
+// registering AutoMapper Profiles
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
@@ -30,6 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

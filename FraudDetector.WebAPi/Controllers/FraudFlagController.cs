@@ -11,14 +11,17 @@ namespace FraudDetector.WebAPI.Controllers
     public class FraudFlagController : ControllerBase
     {
         protected readonly IFraudFlagService _fraudFlagServie;
-        public FraudFlagController(IFraudFlagService fraudFlagService)
+        private readonly ILogger<FraudFlagController> _logger;
+        public FraudFlagController(IFraudFlagService fraudFlagService,ILogger<FraudFlagController> logger)
         {
             _fraudFlagServie = fraudFlagService;
+            _logger = logger;
         }
         // GET: api/<FraudFlagController>
         [HttpGet]
         public async  Task<List<FraudFlagDto>> Get()
         {
+            _logger.LogInformation("Get method called.");
             return await _fraudFlagServie.GetAllAsync();
         }
 
@@ -26,6 +29,7 @@ namespace FraudDetector.WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<FraudFlagDto?> Get(int id)
         {
+            _logger.LogInformation("Get method called with ID = "+ id);
             return await _fraudFlagServie.GetByIdAsync(id);
         }
 
@@ -33,13 +37,15 @@ namespace FraudDetector.WebAPI.Controllers
         [HttpPost]
         public async Task<FraudFlagDto> Post([FromBody] FraudFlagDto fraudFlagDto)
         {
-           return await _fraudFlagServie.Create(fraudFlagDto);
+            _logger.LogInformation("Post method called.");
+            return await _fraudFlagServie.Create(fraudFlagDto);
         }
 
         // PUT api/<FraudFlagController>/5
         [HttpPut]
         public async Task<FraudFlagDto> Put([FromBody] FraudFlagDto fraudFlagDto)
         {
+            _logger.LogInformation("Put method called.");
             return await _fraudFlagServie.Update(fraudFlagDto);
         }
 
@@ -47,6 +53,7 @@ namespace FraudDetector.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<bool> Delete(int id)
         {
+            _logger.LogInformation("Delete method called.");
             return await _fraudFlagServie.Delete(id);
         }
     }

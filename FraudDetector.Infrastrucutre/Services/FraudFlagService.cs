@@ -3,6 +3,7 @@ using FraudDetector.Application.Contracts;
 using FraudDetector.Application.DTOs.Flag;
 using FraudDetector.Domain.Entities;
 using FraudDetector.Domain.Repositories.Base;
+using Microsoft.Extensions.Logging;
 
 namespace FraudDetector.Infrastrucutre.Services
 {
@@ -10,15 +11,17 @@ namespace FraudDetector.Infrastrucutre.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-        public FraudFlagService(IMapper mapper, IUnitOfWork unitOfWork)
+        private readonly ILogger<FraudFlagService> _logger;
+        public FraudFlagService(IMapper mapper, IUnitOfWork unitOfWork, ILogger<FraudFlagService> logger)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<List<FraudFlagDto>> GetAllAsync()
         {
+            _logger.LogInformation("GetAllAsync service method called.");
             var flags = await _unitOfWork.FraudFlags.All();
             return flags.Select(x => _mapper.Map<FraudFlagDto>(x)).ToList();
         }
